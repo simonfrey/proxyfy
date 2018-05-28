@@ -14,6 +14,10 @@ It is as simple as changing `http.Get("https://github.com")` to `proxyfy.Get("ht
 
 ---
 
+# Installation
+
+Simply execute `go get -u github.com/L1am0/proxyfy` in your shell.
+
 # Usage
 You have to setup proxyfy via an initalizer.
 There are two different ones available:
@@ -76,7 +80,7 @@ Fire 30 GET requests and print the http response code
 package main
 
 import(
-	"proxyfy"
+	"github.com/L1am0/proxyfy"
 	"fmt"
 )
 func main() {
