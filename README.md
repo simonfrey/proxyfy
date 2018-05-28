@@ -14,7 +14,8 @@ There are two different ones available:
 `proxyfy := proxyfy.NewProxyfy(apiKey,schema string)`
 
 Here is already a part of the config set:
-`GimmeProxyConfig{
+```go
+GimmeProxyConfig{
 	ApiKey:         apiKey,
 	Protocol:       scheme,
 	MaxCheckPeriod: 30,
@@ -23,14 +24,16 @@ Here is already a part of the config set:
 	SupportsHTTPS:  true,
 	Referer:true,
 	MinSpeed: 2000,
-}`
+}
+```
 
 ## Advanced
 
 `proxyfy := NewProxyfyAdvancedConfig(gimmeConfig GimmeProxyConfig)`
 
 The gimmeConfig is defined via the following struct:
-`type GimmeProxyConfig struct {
+```go
+type GimmeProxyConfig struct {
 	ApiKey         string
 	Get            bool
 	Post           bool
@@ -48,9 +51,35 @@ The gimmeConfig is defined via the following struct:
 	NotCountry     string
 	IPPort         bool
 	Curl           bool
-}`
+}
+```
+
 For documentation on the different values visit: https://gimmeproxy.com/#api
 
+# Example
+Fire 30 Get requests and Print the StatusCode
+
+```go
+package main
+
+import(
+	"proxyfy"
+	"fmt"
+)
+func main() {
+	proxyfy := proxyfy.NewProxyfy("", "http")
+
+	for i := 0; i < 30; i++ {
+		resp, err := proxyfy.Get("https://t3n.de")
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		fmt.Println(resp.StatusCode)
+	}
+
+}
+```
 
 # License
 MIT License
