@@ -1,14 +1,14 @@
-![Proxyfy Logo](https://image.flaticon.com/icons/svg/148/148800.svg)
-
 # Proxyfy
 
-Wrapper around gimmeproxy - API compatible to http.Client
+![Proxyfy Logo](https://image.flaticon.com/icons/svg/148/148800.svg)
 
+Wrapper around gimmeproxy.com - API compatible to http.Client
 
-# Import
-```go
-import("github.com/L1am0/proxyfy")
-```
+With proxyfy you can simply add proxied requests to your go client.
+
+It is as simple as changing `http.Get("https://github.com")` to `proxyfy.Get("https://github.com")`. From now on all the request get forwarded trough a random proxy.
+
+*For getting more than the 240 free request, please visit gimmeproxy.com and get yourself an API key.*
 
 # Usage
 You have to setup proxyfy via an initalizer.
@@ -89,6 +89,82 @@ func main() {
 
 }
 ```
+
+# Available Functions
+
+## GetAllProxys
+GetAllProxys returns a slice containing all proxies that are available
+
+```go 
+func (c *Proxyfy) GetAllProxys() []*url.URL 
+```
+
+## Do
+Do executes the given *http.Request using a random proxy
+
+```go
+func (c *Proxyfy) Do(req *http.Request) (resp *http.Response, err error)
+```
+
+Similar to `http.Do()`
+
+## Get
+Get is a wrapper around Do(). Executes a GET request using a random proxy
+
+```go
+func (c *Proxyfy) Get(url string) (resp *http.Response, err error)
+```
+Similar to `http.Get()`
+
+## Head
+
+Head is a wrapper around Do(). Executes a HEAD request using a random proxy
+
+```go
+func (c *Proxyfy) Head(url string) (resp *http.Response, err error) 
+```
+
+Similar to `http.Head`
+
+## Post
+
+Post is a wrapper around Do(). Executes a POST request using a random proxy
+
+```go
+func (c *Proxyfy) Post(url string, contentType string, body io.Reader) (resp *http.Response, err error)
+```
+
+Similar to `http.Post`
+
+## PostForm
+
+PostForm is a wrapper around Post(). Executes a Post request using a random proxy and sending data as x-www-form-urlencoded
+
+```go
+func (c *Proxyfy) PostForm(url string, data url.Values) (resp *http.Response, err error) 
+```
+
+Similar to `http.PostForm`
+
+## NewProxyfyAdvancedConfig
+NewProxyfyAdvancedConfig sets up proxyfy with an advanced configuration.
+
+```go
+func NewProxyfyAdvancedConfig(gimmeConfig GimmeProxyConfig) *Proxyfy
+```
+
+Also have a look in the part Usage of this README
+
+## NewProxyfy
+
+NewProxyfy sets up proxyfy with a minimal amount of input data
+
+```go
+func NewProxyfy(apiKey, scheme string) *Proxyfy
+```
+
+Also have a look in the part Usage of this README
+
 ---
 
 **License**
