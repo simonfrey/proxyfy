@@ -1,9 +1,14 @@
+![Proxyfy Logo](https://image.flaticon.com/icons/svg/148/148800.svg)
+
 # Proxyfy
+
 Wrapper around gimmeproxy - API compatible to http.Client
 
 
 # Import
-`import("github.com/L1am0/proxyfy")`
+```go
+import("github.com/L1am0/proxyfy")
+```
 
 # Usage
 You have to setup proxyfy via an initalizer.
@@ -11,7 +16,9 @@ There are two different ones available:
 
 ## Simple
 
-`proxyfy := proxyfy.NewProxyfy(apiKey,schema string)`
+```go
+proxyfy := proxyfy.NewProxyfy(apiKey,schema string)
+```
 
 Here is already a part of the config set:
 ```go
@@ -29,7 +36,9 @@ GimmeProxyConfig{
 
 ## Advanced
 
-`proxyfy := NewProxyfyAdvancedConfig(gimmeConfig GimmeProxyConfig)`
+```go
+proxyfy := NewProxyfyAdvancedConfig(gimmeConfig GimmeProxyConfig)
+```
 
 The gimmeConfig is defined via the following struct:
 ```go
@@ -80,6 +89,11 @@ func main() {
 
 }
 ```
+---
 
-# License
+**License**
+
 MIT License
+
+**Icon**
+ Icons made by Smashicons from www.flaticon.com is licensed by CC 3.0 BY
