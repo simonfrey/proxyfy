@@ -8,13 +8,28 @@ Wrapper around gimmeproxy - API compatible to http.Client
 # Usage
 You have to setup proxyfy via an initalizer.
 There are two different ones available:
-**Simple**
+
+## Simple
+
 `proxyfy := proxyfy.NewProxyfy(apiKey,schema string)`
 
-**Advanced**
+Here is already a part of the config set:
+`GimmeProxyConfig{
+	ApiKey:         apiKey,
+	Protocol:       scheme,
+	MaxCheckPeriod: 30,
+	Get:            true,
+	Post:           true,
+	SupportsHTTPS:  true,
+	Referer:true,
+	MinSpeed: 2000,
+}`
+
+## Advanced
+
 `proxyfy := NewProxyfyAdvancedConfig(gimmeConfig GimmeProxyConfig)`
 
-The config is defined via the following struct:
+The gimmeConfig is defined via the following struct:
 `type GimmeProxyConfig struct {
 	ApiKey         string
 	Get            bool
