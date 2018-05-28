@@ -2,6 +2,8 @@
 
 ![Proxyfy Logo](https://image.flaticon.com/icons/svg/148/148800.svg)
 
+---
+
 Wrapper around gimmeproxy.com - API compatible to http.Client
 
 With proxyfy you can simply add proxied requests to your go client.
@@ -9,6 +11,8 @@ With proxyfy you can simply add proxied requests to your go client.
 It is as simple as changing `http.Get("https://github.com")` to `proxyfy.Get("https://github.com")`. From now on all the request get forwarded trough a random proxy.
 
 *For getting more than the 240 free request, please visit gimmeproxy.com and get yourself an API key.*
+
+---
 
 # Usage
 You have to setup proxyfy via an initalizer.
@@ -66,7 +70,7 @@ type GimmeProxyConfig struct {
 For documentation on the different values visit: https://gimmeproxy.com/#api
 
 # Example
-Fire 30 Get requests and Print the StatusCode
+Fire 30 GET requests and print the http response code
 
 ```go
 package main
@@ -171,5 +175,6 @@ Also have a look in the part Usage of this README
 
 MIT License
 
-**Icon**
+**Icons**
+
  Icons made by Smashicons from www.flaticon.com is licensed by CC 3.0 BY
