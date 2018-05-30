@@ -73,7 +73,8 @@ type GimmeProxyConfig struct {
 
 For documentation on the different values visit: https://gimmeproxy.com/#api
 
-# Example
+# Examples
+## [Basic] Use Proxyfys build in http.Client
 Fire 30 GET requests and print the http response code
 
 ```go
@@ -98,6 +99,45 @@ func main() {
 }
 ```
 
+## [Advanced] GetRandomProxy
+Use your own setup of a http.Client with Proxyfy providing you with a random proxy url
+
+
+```go
+package main
+
+import(
+	"github.com/L1am0/proxyfy"
+	"fmt"
+	"net/http"
+)
+func main() {
+	proxyfy := proxyfy.NewProxyfy("", "http")
+	proxyURL := proxyfy.GetRandomProxy()
+
+	transport := &http.Transport{
+		Proxy: http.ProxyURL(proxyURL),
+	}
+	client := http.Client{
+		Transport: transport,
+	}
+
+	req, err := http.NewRequest("GET", "https://t3n.de", nil) 
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(resp.StatusCode)
+}
+```
+
 # Available Functions
 
 ## GetAllProxys
@@ -105,6 +145,13 @@ GetAllProxys returns a slice containing all proxies that are available
 
 ```go 
 func (c *Proxyfy) GetAllProxys() []*url.URL 
+```
+
+## GetRandomProxy
+GetRandomProxy returns a random *url.URL for usage with own http.Client
+
+```go
+func (c *Proxyfy) GetRandomProxy() *url.URL
 ```
 
 ## Do

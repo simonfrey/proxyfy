@@ -217,6 +217,12 @@ func (c *Proxyfy) GetAllProxys() []*url.URL {
 	return c.pStorage.getAllProxys()
 }
 
+//GetRandomProxy returns a random *url.URL for usage with own http.Client
+func (c *Proxyfy) GetRandomProxy() *url.URL {
+	return c.pStorage.getRandomProxy()
+}
+
+
 //Do executes the given *http.Request using a random proxy
 func (c *Proxyfy) Do(req *http.Request) (resp *http.Response, err error) {
 	tlsConfig := &tls.Config{
