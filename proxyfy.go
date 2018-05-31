@@ -1,5 +1,6 @@
 //Package proxyfy provides an api compatible http.Client for making requests
 //All request are routed trough a random proxy provided by gimmeproxy.com
+//For getting more requests visit https://a.paddle.com/v2/click/14088/32188?link=975
 package proxyfy
 
 import (
@@ -133,7 +134,7 @@ tlsConfig := &tls.Config{
 	}
 
 	if proxyURL == nil{
-		return nil, errors.New("Could not get any proxy. Maybe you hit the daily limit of 240 requests to gimmeproxy api.")
+		return nil, errors.New("Could not get any proxy. Maybe you hit the daily limit of 240 requests to gimmeproxy api. For getting more get yourself an API Key: https://a.paddle.com/v2/click/14088/32188?link=975")
 	}
 
 	transport := &http.Transport{
@@ -239,7 +240,7 @@ func (c *Proxyfy) Do(req *http.Request) (resp *http.Response, err error) {
 	}
 
 	if proxyURL == nil{
-		return nil, errors.New("Could not get any proxy. Maybe you hit the daily limit of 240 requests to gimmeproxy api.")
+		return nil, errors.New("Could not get any proxy. Maybe you hit the daily limit of 240 requests to gimmeproxy api. For getting more get yourself an API Key: https://a.paddle.com/v2/click/14088/32188?link=975")
 	}
 
 	transport := &http.Transport{

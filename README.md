@@ -10,7 +10,7 @@ With proxyfy you can simply add proxied requests to your go client.
 
 It is as simple as changing `http.Get("https://github.com")` to `proxyfy.Get("https://github.com")`. From now on all the request get forwarded trough a random proxy.
 
-*For getting more than the 240 free request, please visit gimmeproxy.com and get yourself an API key.*
+*For getting more than the 240 free request, please visit [gimmeproxy.com](https://a.paddle.com/v2/click/14088/32188?link=975) and get yourself an API key. It's just a few bucks per month*
 
 ---
 
@@ -71,7 +71,7 @@ type GimmeProxyConfig struct {
 }
 ```
 
-For documentation on the different values visit: https://gimmeproxy.com/#api
+For documentation on the different values visit: [https://gimmeproxy.com/](https://a.paddle.com/v2/click/14088/32188?link=975)
 
 # Examples
 ## [Basic] Use Proxyfys build in http.Client
@@ -221,6 +221,9 @@ func NewProxyfy(apiKey, scheme string) *Proxyfy
 Also have a look in the part Usage of this README
 
 ---
+
+*For getting more than the 240 free request, please visit [gimmeproxy.com](https://a.paddle.com/v2/click/14088/32188?link=975) and get yourself an API key. It's just a few bucks per month*
+
 
 **License**
 
