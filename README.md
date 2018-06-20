@@ -2,6 +2,15 @@
 
 ![Proxyfy Logo](https://image.flaticon.com/icons/svg/148/148800.svg)
 
+
+---
+
+Help me to grow this project:
+
+[![Donate Button](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/l1am0)
+
+---
+
 ---
 
 Wrapper around gimmeproxy.com - API compatible to http.Client
