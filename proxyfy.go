@@ -163,50 +163,53 @@ tlsConfig := &tls.Config{
 func (c *Proxyfy) loadNewProxys(gimmeConfig GimmeProxyConfig) {
 	qs, _ := query.Values(gimmeConfig)
 
-	requestCountError := 5
+	for {
+		requestCountError := 5
 
-	for i := 0; i < 240 || gimmeConfig.ApiKey != ""; i++ {
+		for i := 0; i < 240 || gimmeConfig.ApiKey != ""; i++ {
 
-		tlsConfig := &tls.Config{
-			InsecureSkipVerify: true,
-		}
-
-		transport := &http.Transport{
-			TLSClientConfig: tlsConfig,
-		}
-
-		timeout := time.Duration(15 * time.Second)
-		client := http.Client{Transport: transport, Timeout: timeout}
-
-		//Get Proxy
-		rResp, err := client.Get("https://gimmeproxy.com/api/getProxy?" + qs.Encode())
-		if err != nil {
-			continue
-		}
-
-		if rResp.StatusCode == 429{
-			requestCountError--
-			if requestCountError <= 0{
-				break
+			tlsConfig := &tls.Config{
+				InsecureSkipVerify: true,
 			}
-			continue
+
+			transport := &http.Transport{
+				TLSClientConfig: tlsConfig,
+			}
+
+			timeout := time.Duration(15 * time.Second)
+			client := http.Client{Transport: transport, Timeout: timeout}
+
+			//Get Proxy
+			rResp, err := client.Get("https://gimmeproxy.com/api/getProxy?" + qs.Encode())
+			if err != nil {
+				continue
+			}
+
+			if rResp.StatusCode == 429 {
+				requestCountError--
+				if requestCountError <= 0 {
+					break
+				}
+				continue
+			}
+
+			var pResponse gimmeProxyResponse
+			defer rResp.Body.Close()
+			body, err := ioutil.ReadAll(rResp.Body)
+
+			err = json.Unmarshal(body, &pResponse)
+			if err != nil {
+				continue
+			}
+
+			aUrl := pResponse.Protocol + "://" + pResponse.IP + ":" + pResponse.Port
+
+			proxyUrl, _ := url.Parse(aUrl)
+
+			c.pStorage.addProxy(proxyUrl)
 		}
 
-		var pResponse gimmeProxyResponse
-		defer rResp.Body.Close()
-		body, err := ioutil.ReadAll(rResp.Body)
-
-		err = json.Unmarshal(body, &pResponse)
-		if err != nil {
-			continue
-		}
-
-
-		aUrl := pResponse.Protocol + "://"+pResponse.IP + ":" + pResponse.Port
-
-		proxyUrl, _ := url.Parse(aUrl)
-
-		c.pStorage.addProxy(proxyUrl)
+		time.Sleep(1 * time.Hour)
 	}
 }
 
